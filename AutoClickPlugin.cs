@@ -9,7 +9,7 @@ namespace TimeAutoclickers
     {
         public const string PLUGIN_GUID = "com.github.TheAshenWolf.TimeAutoclickers";
         public const string PLUGIN_NAME = "TimeAutoclickers";
-        public const string PLUGIN_VERSION = "1.0.0";
+        public const string PLUGIN_VERSION = "1.1.0";
     }
 
 
@@ -20,27 +20,12 @@ namespace TimeAutoclickers
 
         private void Awake()
         {
-            Logger.LogInfo($"Time to autoclick!");
+            Logger.LogInfo($"Running Ashen's AutoClicker Plugin v{Constants.PLUGIN_VERSION}");
+            Logger.LogInfo("https://github.com/TheAshenWolf/TimeAutoclickers");
             logger = Logger;
 
             Harmony harmony = new Harmony(Constants.PLUGIN_GUID);
             harmony.PatchAll();
-        }
-    }
-
-    [HarmonyPatch(typeof(UIHero)), HarmonyPatch("OnGoldChanged")]
-    public class Autobuy
-    {
-        public static bool Prefix(UIHero __instance)
-        {
-            Hero hero = Traverse.Create(__instance).Field("hero").GetValue<Hero>();
-            if (GoldBank.CanAfford(hero.LevelUpCost()))
-            {
-                Traverse.Create(__instance).Method("OnClickBuy").GetValue();
-                AutoClickPlugin.logger.LogInfo("Buying upgrade for " + hero.name);
-                return false;
-            }
-            return true;
         }
     }
 }
