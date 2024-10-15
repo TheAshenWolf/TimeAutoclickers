@@ -11,7 +11,7 @@ namespace TimeAutoclickers
             if (GoldBank.CanAfford(hero.LevelUpCost()))
             {
                 Traverse.Create(__instance).Method("OnClickBuy").GetValue();
-                AutoClickPlugin.logger.LogInfo("Buying upgrade for " + hero.name);
+                AutoClickPlugin.Logger.LogInfo("Buying upgrade for " + hero.name);
                 return false;
             }
             return true;
