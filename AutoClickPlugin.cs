@@ -1,5 +1,6 @@
 ﻿using System;
 using BepInEx;
+using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
 
@@ -11,9 +12,19 @@ namespace TimeAutoclickers
         public static AutoClickPlugin Instance { get; private set; }
         public new static ManualLogSource Logger { get; private set; }
 
+        private ConfigEntry<bool> configAutobuyUpgrades;
+        private ConfigEntry<bool> configAutobuyClickPistol;
+        private ConfigEntry<bool> configAutobuyActiveAbilities;
+
+        private ConfigEntry<bool> configAutorunDimensionalShift;
+        private ConfigEntry<bool> configAutoActivateSkillsOnBossFail;
+        private ConfigEntry<bool> configAutoActivateCooldownSkill;
+
         private void Awake()
         {
             Logger = base.Logger;
+
+            SetupConfig();
 
             Logger.LogInfo($"Running Ashen's AutoClicker Plugin v{Constants.PLUGIN_VERSION}");
             Logger.LogInfo("https://github.com/TheAshenWolf/TimeAutoclickers");
@@ -21,6 +32,23 @@ namespace TimeAutoclickers
             Instance = this;
             Harmony harmony = new Harmony(Constants.PLUGIN_GUID);
             harmony.PatchAll();
+        }
+
+        private void SetupConfig()
+        {
+            configAutobuyUpgrades = Config.Bind("Autobuyers", "Autobuy Upgrades", true,
+                "Automatically buys upgrades as soon as they are affordable.");
+            configAutobuyClickPistol = Config.Bind("Autobuyers", "Autobuy Click Pistol", true,
+                "Automatically buys the Click Pistol upgrade as soon as it is affordable.");
+            configAutobuyActiveAbilities = Config.Bind("Autobuyers", "Autobuy Active Abilities", true,
+                "Automatically buys active abilities as soon as they are affordable.");
+
+            configAutorunDimensionalShift = Config.Bind("Skills", "Autorun Dimensional Shift", true,
+                "Performs the Dimensional Shift on cooldown.");
+            configAutoActivateSkillsOnBossFail = Config.Bind("Skills", "Auto-Activate Skills on Boss Fail", true,
+                "Automatically activates skills when you fail a boss arena.");
+            configAutoActivateCooldownSkill = Config.Bind("Skills", "Auto-Activate Cooldown Skill", true,
+                "Automatically runs the cooldown skill on cooldown.");
         }
     }
 }
