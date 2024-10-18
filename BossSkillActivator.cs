@@ -7,7 +7,11 @@ namespace TimeAutoclickers
     {
         public static bool Prefix(Arena __instance)
         {
-            AutoClickPlugin.Logger.LogInfo("Failed the boss arena. Attempting to activate skills.");
+            if (!AutoClickPlugin.Instance.configAutoActivateSkillsOnBossFail.Value)
+            {
+                return true;
+            }
+
             ActiveAbilities.ActivateAll();
             return true;
         }

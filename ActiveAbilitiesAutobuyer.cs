@@ -8,6 +8,11 @@ namespace TimeAutoclickers
     {
         public static void Postfix(UIAbilityUnlocks __instance)
         {
+            if (!AutoClickPlugin.Instance.configAutobuyActiveAbilities.Value)
+            {
+                return;
+            }
+
             // As buying an ability calls the Refresh, we don't need to loop this
             if (__instance.unlockButton.interactable)
             {

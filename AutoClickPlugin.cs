@@ -12,13 +12,13 @@ namespace TimeAutoclickers
         public static AutoClickPlugin Instance { get; private set; }
         public new static ManualLogSource Logger { get; private set; }
 
-        private ConfigEntry<bool> configAutobuyUpgrades;
-        private ConfigEntry<bool> configAutobuyClickPistol;
-        private ConfigEntry<bool> configAutobuyActiveAbilities;
+        public ConfigEntry<bool> configAutobuyUpgrades;
+        public ConfigEntry<bool> configAutobuyClickPistol;
+        public ConfigEntry<bool> configAutobuyActiveAbilities;
 
-        private ConfigEntry<bool> configAutorunDimensionalShift;
-        private ConfigEntry<bool> configAutoActivateSkillsOnBossFail;
-        private ConfigEntry<bool> configAutoActivateCooldownSkill;
+        public ConfigEntry<bool> configAutorunDimensionalShift;
+        public ConfigEntry<bool> configAutoActivateSkillsOnBossFail;
+        public ConfigEntry<bool> configAutoActivateCooldownSkill;
 
         private void Awake()
         {

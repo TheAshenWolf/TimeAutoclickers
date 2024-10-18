@@ -8,6 +8,11 @@ namespace TimeAutoclickers
     {
         public static void Postfix()
         {
+            if (!AutoClickPlugin.Instance.configAutobuyClickPistol.Value)
+            {
+                return;
+            }
+
             UISkill uiSkill = Object.FindObjectOfType<UISkill>();
             Traverse onClickBuyMethod = Traverse.Create(uiSkill).Method("OnClickBuy");
             for (int i = 0; i < 13; i++)
