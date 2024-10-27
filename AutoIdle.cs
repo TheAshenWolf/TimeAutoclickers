@@ -9,6 +9,11 @@ namespace TimeAutoclickers
     {
         public static void Postfix()
         {
+            if (!AutoClickPlugin.Instance.configAutoIdle.Value)
+            {
+                return;
+            }
+
             UIButtonIdleMode[] buttons = Object.FindObjectsOfType<UIButtonIdleMode>();
             foreach (UIButtonIdleMode button in buttons)
             {

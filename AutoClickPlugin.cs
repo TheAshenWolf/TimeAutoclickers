@@ -20,6 +20,8 @@ namespace TimeAutoclickers
         public ConfigEntry<bool> configAutoActivateSkillsOnBossFail;
         public ConfigEntry<bool> configAutoActivateCooldownSkill;
 
+        public ConfigEntry<bool> configAutoIdle;
+
         private void Awake()
         {
             Logger = base.Logger;
@@ -49,6 +51,9 @@ namespace TimeAutoclickers
                 "Automatically activates skills when you fail a boss arena.");
             configAutoActivateCooldownSkill = Config.Bind("Skills", "Auto-Activate Cooldown Skill", true,
                 "Automatically runs the cooldown skill on cooldown.");
+
+            configAutoIdle = Config.Bind("Misc", "Auto Idle", true,
+                "Automatically switches the guns to idle.");
         }
     }
 }
